@@ -1,48 +1,14 @@
 import JWT from "jsonwebtoken"
 import { comparePassword, hashPassword } from "../helpers/UserHelper.js"
 import users from "../models/User.js"
-import multer from "multer"
-import images from "../models/image.js"
 
-
-
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      return cb(null, './uploads')
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null,  uniqueSuffix + file.originalname )
-      }
-    }
-  )
-  
-export  const upload = multer({ storage: storage })
 
 export const controller =(request,response)=>{
         console.log("hello from home")
         response.send("hello from home......../")
     }
 
- 
-export const uploadImg = async (req, res) => {
-    try {
-        const { path } = req.file;
-
-        console.log(req.body);
-        console.log(req.file);
-        
-        const img = new images({ img: path }); 
-        await img.save();
-
-        res.status(200).json({ message: 'Image uploaded successfully' });
-    } catch (error) {
-        console.error('Error during image upload:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-};
-
+// saving data to mongoDB
 export const saveForm = async (request, response) => {
 
         // let data = await new users(request.body);

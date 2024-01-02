@@ -9,8 +9,7 @@ dotenv.config();
 const dbConnection =  () => {
 
     try {
-// mongoose.connect("mongodb://localhost:27017/userProfile")
-
+// mongose.connect("mongodb://localhost:27017/userProfile")
     mongoose.connect(process.env.live_db)
     console.log(`database connected successffuly` .bgGreen)
     } catch (err) {
