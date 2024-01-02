@@ -19,11 +19,8 @@ import {
 import { isAdmin, requireSignIn } from "../middleware/authMiddle.js";
 import uploadSingle from "../controllers/fileUpload.js";
 // import uploadSingle from "../controllers/fileUpload";
-import cors from 'cors';
 
 const router = express.Router();
-
-app.use(cors());
 
 router.get("/hello", controller);
 router.post("/register", saveForm);
