@@ -19,7 +19,6 @@ import {
 import { isAdmin, requireSignIn } from "../middleware/authMiddle.js";
 import uploadSingle from "../controllers/fileUpload.js";
 // import uploadSingle from "../controllers/fileUpload";
-import cors from 'cors';
 
 const router = express.Router();
 
@@ -39,8 +38,6 @@ router.get("/get_Products", getProducts);
 router.get("/SingleProduct/:id", find_product_id);
 router.post("/postOrder", send_products);
 
-// Upload route/
-app.options('/upload', cors(corsOptions));
-app.post('/upload', cors(corsOptions), uploadSingle);
+app.post('/upload', uploadSingle);
 
 export default router;
