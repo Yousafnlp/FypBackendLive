@@ -9,7 +9,7 @@ import images from "../models/image.js"
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      return cb(null, './uploads')
+      return null
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
@@ -25,22 +25,22 @@ export const controller =(request,response)=>{
         response.send("hello from home......../")
     }
 
- 
+ // Example logging in your uploadImg function
 export const uploadImg = async (req, res) => {
-    try {
-        const { path } = req.file;
+  try {
+    const { path } = req.file;
 
-        console.log(req.body);
-        console.log(req.file);
+    console.log('Request body:', req.body);
+    console.log('Uploaded file:', req.file);
 
-        const img = new images({ img: path });
-        await img.save();
+    const img = new images({ img: path });
+    await img.save();
 
-        res.status(200).json({ message: 'Image uploaded successfully' });
-    } catch (error) {
-        console.error('Error during image upload:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+    res.status(200).json({ message: 'Image uploaded successfully' });
+  } catch (error) {
+    console.error('Error during image upload:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
 
 export const saveForm = async (request, response) => {
