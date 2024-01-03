@@ -6,9 +6,6 @@ import { isAdmin, requireSignIn } from "../middleware/authMiddle.js";
 
 const router = express.Router()
 
-
-// router.post("/upload", upload.single("img"), uploadImg)
-
 router.get("/hello",controller);
 
 router.post("/register", saveForm);
