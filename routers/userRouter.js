@@ -1,10 +1,13 @@
 import express from "express";
-import {SearchUsers, controller, deleteForm, find_user_id, getForm, saveForm, updateForm, loginUser, yesAdmin} from "../controllers/userController.js";
+import {SearchUsers, controller, deleteForm, find_user_id, getForm, saveForm, updateForm, loginUser, yesAdmin, uploadImg} from "../controllers/userController.js";
 import { find_product_id, getProducts, send_products, setProducts } from "../controllers/ProductControllers.js";
 import { isAdmin, requireSignIn } from "../middleware/authMiddle.js";
 
 
 const router = express.Router()
+
+
+router.post("/upload", upload.single("img"), uploadImg)
 
 router.get("/hello",controller);
 
