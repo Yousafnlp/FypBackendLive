@@ -24,30 +24,8 @@ export const controller =(request,response)=>{
         console.log("hello from home")
         response.send("hello from home......../")
     }
-
- // Example logging in your uploadImg function
-// export const uploadImg = async (req, res) => {
-//   try {
-//     const { path } = req.file;
-
-//     console.log('Request body:', req.body);
-//     console.log('Uploaded file:', req.file);
-
-//     const img = new images({ img: path });
-//     await img.save();
-
-//     res.status(200).json({ message: 'Image uploaded successfully' });
-//   } catch (error) {
-//     console.error('Error during image upload:', error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// };
-
 export const saveForm = async (request, response) => {
 
-        // let data = await new users(request.body);
-        // let result = await data.save();
-        // response.send(result);
 
         try{
 
@@ -251,28 +229,11 @@ export const deleteForm = async (request, response) => {
 // updating data on the basis of id on client and server server side 
 export const updateForm = async (request, response) => {
     try {
-        const userId = request.params.id;
-        const updates = request.body;
+      
+        const id = request.params.id;
 
-        // Check if the user is providing a new password
-        if (updates.password) {
-            // Hash the new password
-            const hashedPassword = await hashPassword(updates.password);
-            updates.password = hashedPassword;
-            updates.cpassword = hashedPassword;
-        }
-
-        // Update the user's data
-        const updatedUser = await users.findByIdAndUpdate(userId, updates, {
-            new: true, // Return the updated user
-        });
-
-        response.status(200).send({
-            success: true,
-            "message" : "User updated successfully",
-            user: updatedUser,
-        });
-        
+        let data = await users.findOneAndUpdate({ id }, { $set: request.body });
+        response.send(data); 
     } catch (error) {
         console.error(error);
         response.status(500).send({
